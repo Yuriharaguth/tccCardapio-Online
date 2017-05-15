@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template/templat_basico.xhtml">
+
+	<ui:define name="way">
+		icone/index
+	</ui:define>
+	
+	<ui:define name="title">
+		<h3 class="page-header">Gerenciar Funcionários</h3>
+		<p:messages id="mensagem" />
+	</ui:define>
+	
+	<ui:define name="body">
+	
+	<h:form id="formListagem">
+	<p:panel header="Funcionários - Listagem">
+	
+		<p:dataTable id="tableFuncionario" var="user" emptyMessage="Nenhum registro encontrado!" paginator="true" 
+		 value="#{userBean.users}"  rows="15">
+			<f:facet name="header" >
+				<p:commandButton value="Novo" oncomplete="PF('dlgFuncionario').show();"
+					actionListener="#{userBean.novo}" update=":formUser"/>
+			</f:facet>
+			<p:column headerText="Id">
+				<h:outputText value="#{user.id}" />
+			</p:column>
+			<p:column  headerText="Nome" sortBy="#{user.nome}">
+				<h:outputText value="#{user.nome}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{user.email}" />
+			</p:column>
+			<p:column style="text-align: center;" headerText="Ação" >
+				<p:commandButton icon="ui-icon-close" title="Remover User"  
+					actionListener="#{userBean.excluir}" update=":mensagem :formListagem:tableFuncionario">
+					<p:confirm header="Confirmação" message="Deseja excluir?" icon="ui-icon-alert" />
+					<f:attribute  name="userSelecionado" value="#{user}"/>
+				</p:commandButton>
+				<p:commandButton icon="ui-icon-pencil" update=":mensagem :formUserUpdate"
+					actionListener="#{userBean.editar}" oncomplete="PF('dlgFuncionarioUpdate').show();">
+					<f:attribute  name="userSelecionado" value="#{user}"/>
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="text-align: center;">
+        	<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+        	<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    	</p:confirmDialog>
+    	
+	</p:panel>
+	</h:form>
+	
+	<!-- DIALOG CREATE -->
+	<p:dialog header="Funcionários Cadastro" widgetVar="dlgFuncionario" 
+		draggable="false" resizable="false" modal="true" width="500px">
+		<h:form id="formUser">
+				
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right" >
+					<p:outputLabel value="Nome" />
+				</div>
+				<div class="col-lg-9">
+					<p:inputText  style="width: 100%;" placeholder="Digite o Nome"
+						required="true" requiredMessage="Informe o nome" value="#{userBean.user.nome}"/>
+				</div>
+			</div>
+							
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right">
+					<p:outputLabel value="Email" />
+				</div>
+				<div class="col-lg-9">
+					<p:inputText style="width: 100%;" placeholder="Digite Email" 
+						required="true" requiredMessage="Informe o email" value="#{userBean.user.email}"/>
+				</div>
+			</div>
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right">
+					<p:outputLabel value="Senha" />
+				</div>
+				<div class="col-lg-9">
+					<p:password id="pwd1"  feedback="false"
+							match="pwd2" label="Senhas não correspondem! " required="true" style="width: 100%;"
+							 placeholder="Digite Senha" value="#{userBean.user.senha}"/>
+				</div>
+			</div>
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right">
+					<p:outputLabel value="Confirmar Senha" />
+				</div>
+				<div class="col-lg-9">
+					<p:password id="pwd2"  feedback="false"
+							label="Senhas não correspondem! " required="true" style="width: 100%;"
+							 placeholder="Repita Senha" value="#{userBean.user.confSenha}"/>
+				</div>
+			</div>
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-12 text-center">
+					<p:commandButton value="Salvar" actionListener="#{userBean.salvar}" update=":mensagem :formListagem:tableFuncionario" oncomplete="PF('dlgFuncionario').hide();"/>
+					<p:commandButton value="Fechar" oncomplete="PF('dlgFuncionario').hide();"/>
+				</div>
+			</div>
+			
+		</h:form>
+	</p:dialog>
+	
+	<!-- DIALOG UPDATE -->
+	<p:dialog header="Funcionários Cadastro" widgetVar="dlgFuncionarioUpdate" 
+		draggable="false" resizable="false" modal="true" width="500px">
+		
+		<h:form id="formUserUpdate">
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right" >
+					<p:outputLabel value="Nome" />
+				</div>
+				<div class="col-lg-9">
+					<p:inputText  style="width: 100%;" placeholder="Digite o Nome"
+						required="true" requiredMessage="Informe o nome" value="#{userBean.user.nome}"/>
+				</div>
+			</div>
+							
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right">
+					<p:outputLabel value="Email" />
+				</div>
+				<div class="col-lg-9">
+					<p:inputText style="width: 100%;" placeholder="Digite Email" 
+						required="true" requiredMessage="Informe o email" value="#{userBean.user.email}"/>
+				</div>
+			</div>
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-12 text-center">
+					<p:commandButton value="Atualizar" actionListener="#{userBean.salvar}" update=":mensagem :formListagem:tableFuncionario" oncomplete="PF('dlgFuncionario').hide();"/>
+					<p:commandButton value="Fechar" oncomplete="PF('dlgFuncionarioUpdate').hide();"/>
+				</div>
+			</div>
+			
+		</h:form>
+	</p:dialog>	
+	
+	</ui:define>
+
+</ui:composition>
+		
+</html>

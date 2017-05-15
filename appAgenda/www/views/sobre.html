@@ -1,0 +1,29 @@
+<ion-view view-title="{{sobre}}">
+    
+    <ion-content>              
+        <div class="row">
+            
+            <div class="list card">
+
+              <div class="item item-avatar">
+                <img src="/img/garcom.jpg">
+                <h2>Cardápio Online</h2>
+                <p>Como funciona?</p>
+              </div>
+
+              <div class="item item-body">
+                <img class="full-image" src="/img/estrutura.PNG">
+                <p>1 - Gerenciador: O Proprietário do estabelecimento faz o cadastro dos produtos em nosso sistema através de nossa aplicação, sendo um sistema totalmente online, tendo como arquitetura o modelo cliente / servidor, sendo o cliente qualquer navegador com acesso a internet.</p>
+                <p>2 - O lado servidor de nossa aplicação recebe as informações, executa as regras de negócio e realiza a perssistência no banco de dados.</p>
+                <p>3 - Banco de dados: Respeitando o modelo relacional é utilizado o MySQL que por sua vez é o banco de dados de código aberto mais popular do mundo.</p>
+                <p>4 - Aplicativo cardápio: Utilizando a plataforma de desenvolvimento Intel Xdk, que reuni os principais frameworks de desenvolvimento hibridos como Ionic, angular e Apache Cordova. Aplicativo Cardápio traz todos os produtos do estabelecimento, o cliente por sua vez escolhe e realiza seu pedido que é enviado de volta para api.</p>
+                <p>5 - API: A api implementa a arquitetura REST, Representational State Transfer (REST), em português Transferência de Estado Representacional, é uma abstração da arquitetura da World Wide Web, mais precisamente, é um estilo arquitetural que consiste de um conjunto coordenado de restrições arquiteturais aplicadas a componentes, conectores e elementos de dados dentro de um sistema de hipermídia distribuído. Assim encarrega de fazer a comunicação do aplicativo com o banco de dados.</p>
+                <p>6 - Aplicativo Cozinha: Tambem utilizando as ferramentas disponibilizadas pelo Itel Xdk, recebe as informações da API que se encarrega de trazer todos os pedidos que foram recebidos dos aplicativos cardápio, trazendo as informações necessarias para a cozinha dar procedimento ao atendimento, além de receber os pedidos o aplciativo informa quando o mesmo esta pronto, bastanto o usuário informa com um toque na tela.</p>
+              </div>
+
+            </div>
+        
+        </div>
+        
+    </ion-content>
+</ion-view>

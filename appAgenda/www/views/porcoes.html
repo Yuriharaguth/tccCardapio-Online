@@ -1,0 +1,17 @@
+<ion-view view-title="{{porcoes}}">
+    
+    <ion-content>
+        
+        <div class="list" ng-repeat="produto in produtos">
+
+            <a class="item item-thumbnail-left" href="#" ng-click="abreModal(produto.id)">
+              <img src="http://localhost:8080/uploads/{{produto.id}}.jpg">
+              <h2>{{produto.nome}}</h2>
+              <p>{{produto.descricao}}</p>
+            </a>
+
+        </div>
+        
+    </ion-content>
+    
+</ion-view>

@@ -1,0 +1,26 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Detalhes do Produto</h1>
+        <button class="button button-clear button-icon ion-close" ng-click="fechaModal()"></button>
+    </ion-header-bar>
+    <ion-content>
+        
+        <div class="list card"  ng-repeat="produto in produtoSelect">
+
+          <div class="item item-avatar">
+            <img src="/img/garcom.jpg">
+            <h2>Numero: {{produto.id}}</h2>
+            <p>{{produto.nome}}</p>
+          </div>
+
+          <div class="item item-body">
+            <img class="full-image" src="http://localhost:8080/uploads/{{produto.id}}.jpg" >
+            <p>{{produto.descricao}}</p>
+            <p>
+                <button class="button button-full button-positive" ng-click="setPedido(produto)"> Pedido</button>
+            </p>
+          </div>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

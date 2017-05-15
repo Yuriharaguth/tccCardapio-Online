@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition>
+	<div  style="height: 55px; background-color:#87b6d9;">
+		<h4 style="margin-left: 36%; padding-top: 8%; color: white">MENU</h4>
+	</div>
+		<ul class="nav menu">
+		<h:form>
+			<li style="height: 35px;"><h:commandLink value="Mesas | Pedidos" action="newmesa"/></li>
+			<li style="height: 35px;"><h:commandLink value="Produtos" action="newproduto"/></li>
+			<li style="height: 35px;"><h:commandLink value="Categorias" action="newcategoria"/></li>
+			<li style="height: 35px;"><h:commandLink value="Funcionários" action="newuser"/></li>
+			<li style="height: 35px;"><a href="#"> Fechar Caixa</a></li>
+		</h:form>
+		</ul>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,47 @@
+<ion-view view-title="{{loginTitle}}">
+    
+    <ion-content >
+        
+        <div class="row">
+            <div class="col">
+                
+                <div class="row">
+                     <div class="col"><img class="full-image" src="/img/LogoFactory.jpg"></div>
+                </div>
+                
+                <form name="formLogin">
+                    
+                        <div class="list">
+                            
+                          <label class="item item-input">
+                            <input type="text" placeholder="Email" class="input" name="email"  ng-model="login.email">
+                          </label>
+                          <label class="item item-input">
+                            <input type="password" placeholder="Senha" class="input" name="senha"  ng-model="login.senha">
+                          </label>
+                          <label class="item item-input">
+                            <input type="text" placeholder="Numero da mesa" class="input" name="mesa"  ng-model="login.mesa">
+                          </label>
+                            
+                        </div>
+    
+                </form>   
+                <button class="button button-full button-positive" ng-click="loginEnviar(login)">Enviar</button>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="item item-text-wrap">
+                        <h3>Para acessar as informações, realize o login!</h3>
+                        <h3>Email : cadastrado</h3>
+                        <h3>Senha : cadastrado</h3>
+                        <h3>Numero da mesa : cadastrado</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>

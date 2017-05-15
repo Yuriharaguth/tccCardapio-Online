@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template/templat_basico.xhtml">
+
+	<ui:define name="way">
+		icone/index
+	</ui:define>
+	
+	<ui:define name="title">
+		<h3 class="page-header">Gerenciar Mesas | Pedidos</h3>
+		<p:messages id="mensagem" />
+	</ui:define>
+	
+	<ui:define name="body">
+	
+		<div class="row">
+		
+			<!-- lista de mesas -->
+			<div class="col-lg-5">
+			
+				<div class="row">
+				
+					<div class="col-lg-12">
+						
+						<div class="row">
+						
+							<div class="col-lg-12">
+							
+								<h:form id="formMesasListas">
+									<p:dataList value="#{mesaBean.listMesa}" var="mesa" type="definition" chunkSize="3" id="listaMesasAtivas" emptyMessage="Nenhum registro encontrado!">
+								        <f:facet name="header">
+								        
+								        	<div class="row">
+											
+												<div class="col-lg-4">
+													Mesas Ativas 
+												</div >
+												
+												<div class="col-lg-4">
+												    <p:commandButton icon="ui-icon-arrowrefresh-1-e" value="Atualizar" title="Atualisar Lista" actionListener="#{mesaBean.atualisarListaMesas}" 
+								        				update=":formMesasListas:listaMesasAtivas">
+													</p:commandButton>
+												</div>
+												
+											</div>
+								    
+								        </f:facet>
+								        
+								     	<div class="row padding">
+											
+											<div class="col-lg-4 padding-dow">
+												<p>Mesa <br/> numero:  #{mesa.numero}</p>
+											</div>
+											<div class="col-lg-3">
+												<p:graphicImage url="http://localhost:8080/uploads/mesa.PNG" height="50"/>
+											</div>
+											<div class="col-lg-5 padding-dow2">
+												
+												<p:commandButton value="Fechar Conta" title="Fechar Conta" actionListener="#{mesaBean.fecharConta}" 
+													oncomplete="PF('dlgConta').show();" update=":formFecharConta">
+													<f:attribute  name="mesaSelecionado" value="#{mesa}"/>
+												</p:commandButton>
+												
+											</div>
+										
+										</div>
+								    </p:dataList>
+								</h:form>
+								
+							</div>
+							
+						</div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+	
+			<!-- lista de pedidos -->
+			<div class="col-lg-7">
+			
+				<div class="row">
+	
+					<div  class="col-lg-12">
+					
+						
+						<div class="row">
+						
+							<div  class="col-lg-12">
+							
+								<h:form id="formPedidoLista">
+									<p:dataList value="#{mesaBean.listItens}" var="itens" type="definition" chunkSize="3" id="listaPedidos" emptyMessage="Nenhum registro encontrado!">
+									
+										<f:facet name="header">
+											
+											<div class="row">
+											
+												<div class="col-lg-4">
+													Pedidos em Espera 
+												</div>
+											
+												<div class="col-lg-3">
+													
+													<p:commandButton value="Atualizar" icon="ui-icon-arrowrefresh-1-e" title="Atualisar Lista" actionListener="#{mesaBean.atualisarListaPedidos}" 
+												    		 update=":formPedidoLista:listaPedidos" >
+													</p:commandButton>
+											
+												</div>
+												
+												<div class="col-lg-3">
+									
+													<p:commandButton value="Novo" icon="ui-icon-plus" title="Adicionar Pedido" actionListener="#{mesaBean.atualisarListaMesas}" 
+										        			update=":formMesasListas:listaMesasAtivas">
+													</p:commandButton>
+													
+												</div>
+												
+												<div class="col-lg-1"></div>
+											
+											</div>           
+					
+										</f:facet>
+										
+										<div class="row padding">
+											<div class="color">
+											
+												<div class="col-lg-5">
+													<p>Mesa numero: #{itens.ped.conta.mesa.numero}</p>
+													<p>Produto: #{itens.prod.nome}</p>
+													<p>Status: #{itens.status == 1 ? 'Aguardando':'Produção'}</p> 
+												</div>
+												
+												<div class="col-lg-4">
+													<p:graphicImage url="http://localhost:8080/uploads/#{itens.prod.id}.jpg" height="80"/> 
+												</div>
+												
+												<div class="col-lg-3 padding-dow3">
+												
+													<p:commandButton value="Cancelar" icon="ui-icon-close" title="Atualisar Lista" actionListener="#{mesaBean.atualisarListaMesas}" 
+								        					update=":formMesasListas:listaMesasAtivas">
+													</p:commandButton>
+													
+												</div>
+											</div>
+										</div>
+										
+								    </p:dataList>
+								</h:form>
+								
+							</div>
+						
+						</div>
+						
+					</div>
+				
+				</div>
+	
+				
+			</div>
+			
+		</div>
+		
+		
+		
+		
+		
+	<p:dialog header="Produto Cadastro" widgetVar="dlgConta" 
+		draggable="false" resizable="false" modal="true" width="520px">
+		
+		<h:form id="formFecharConta" >
+		
+			<h3>O valor total da Conta é: R$ 17,00</h3>
+
+		</h:form>
+		
+	</p:dialog>
+
+	</ui:define>
+
+</ui:composition>
+		
+</html>

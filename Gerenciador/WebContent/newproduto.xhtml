@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/_template/templat_basico.xhtml">
+
+	<ui:define name="way">
+		icone/index
+	</ui:define>
+	
+	<ui:define name="title">
+		<h3 class="page-header">Gerenciar Produto</h3>
+		<p:messages id="mensagem" />
+	</ui:define>
+	
+	<ui:define name="body">
+	
+	<h:form id="formProdutoTable">
+	<p:panel header="Produto - Listagem">
+		<p:dataTable id="tableProduto" emptyMessage="Nenhum registro encontrado!" paginator="true" 
+			var="prod" value="#{produtoBean.produtos}"  rows="15">
+			
+			<f:facet name="header" >
+				<p:commandButton value="Novo" oncomplete="PF('dlgProduto').show();"
+					 actionListener="#{produtoBean.novo}" update=":formProduto"/>
+			</f:facet>
+		
+			<p:column headerText="Id">
+				<h:outputText value="#{prod.id}" />
+			</p:column>
+				
+			<p:column  headerText="Nome">
+				<h:outputText value="#{prod.nome}" />
+			</p:column>
+				
+			<p:column headerText="Valor">
+				<h:outputText value="#{prod.valor}">
+					<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Qtd">
+				<h:outputText value="#{prod.qtd}" />
+			</p:column>
+			
+			<p:column  headerText="Categoria">
+				<h:outputText value="#{prod.cat.nome}" />
+			</p:column>
+			
+			<p:column headerText="Imagem">
+				<p:graphicImage cache="false" height="50"
+				 url="http://localhost:8080/uploads/#{prod.id}.jpg" />
+			</p:column>
+			<!-- <Context docBase="C:/uploads" path="/uploads" /> REGISTRA O PATH DA IMG NO SERVIDOR! -->
+			
+			<p:column style="text-align: center;" headerText="Ação">
+			
+				<p:commandButton icon="ui-icon-close" title="Remover Produto"  
+					actionListener="#{produtoBean.excluir}" update=":mensagem :formProdutoTable:tableProduto">
+					<p:confirm header="Confirmação" message="Deseja excluir?" icon="ui-icon-alert" />
+					<f:attribute  name="produtoSelecionado" value="#{prod}"/>
+				</p:commandButton>
+				
+				<p:commandButton icon="ui-icon-pencil" update=":mensagem :formProduto"
+					actionListener="#{produtoBean.editar}" oncomplete="PF('dlgProduto').show();">
+					<f:attribute  name="produtoSelecionado" value="#{prod}"/>
+				</p:commandButton>	
+				
+			</p:column>
+		
+		</p:dataTable>
+		
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="text-align: center;">
+        	<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+        	<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    	</p:confirmDialog>
+    	
+	</p:panel>
+	</h:form>
+	
+	<p:dialog header="Produto Cadastro" widgetVar="dlgProduto" 
+		draggable="false" resizable="false" modal="true" width="500px">
+		<h:form id="formProduto" >
+			
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right" >
+					<p:outputLabel value="Nome" />
+				</div>
+				<div class="col-lg-9">
+					<p:inputText  style="width: 100%;" placeholder="Digite o Nome"
+						required="true" requiredMessage="Informe o nome" value="#{produtoBean.produto.nome}"/>
+				</div>
+			</div>
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right">
+					<p:outputLabel value="Descrição" />
+				</div>
+				<div class="col-lg-9">
+					<p:inputTextarea style="width: 100%;" placeholder="Digite Descrição" 
+						required="false" value="#{produtoBean.produto.descricao}"/>
+				</div>
+			</div>
+			
+			 			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right">
+					<p:outputLabel value="Valor" />
+				</div>
+				<div class="col-lg-9">
+					<p:inputText style="width: 100%;" placeholder="Digite Valor" 
+						required="true" requiredMessage="Informe o valor" maxlength="7" value="#{produtoBean.produto.valor}"
+						converterMessage="A entrada no campo 'Valor' não é compativel!"  validatorMessage="Campo valor inválido! ">
+						<f:validateDoubleRange minimum="0.01" maximun="9999.99"/>
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+						<f:validateDoubleRange minimum="0.01"/>
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+						</p:inputText>
+				</div>
+			</div>
+			 
+			 
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right">
+					<p:outputLabel value="Quantidade" />
+				</div>
+				<div class="col-lg-9">
+					<p:inputText style="width: 100%;" placeholder="Digite a Quantidade" 
+						required="true" requiredMessage="Informe a quantidade" value="#{produtoBean.produto.qtd}"
+						converterMessage="A entrada no campo 'Quantidade' não é compativel!" validatorMessage="Campo quantidade, valor inválido! ">
+						<f:validateDoubleRange minimum="0"/>
+					</p:inputText>
+				</div>
+			</div>
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-3 text-right">
+					<p:outputLabel value="Categoria" />
+				</div>
+				<div class="col-lg-9">
+					<p:selectOneMenu filter="true" value="#{produtoBean.idCategoria}">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione uma Categoria"/>
+						<f:selectItems value="#{produtoBean.categorias}" />
+					</p:selectOneMenu>
+				</div>
+			</div>
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-4 text-right" >
+					<p:outputLabel value="Imagem" />
+				</div>
+				<div class="col-lg-4">
+					<p:fileUpload id="imagem" mode="advanced" fileUploadListener="#{produtoBean.uploadFoto}" label="Foto" />
+				</div>
+			</div>
+			
+			<div class="row" style="margin-bottom:15px;">
+				<div class="col-lg-12 text-center">
+					<p:commandButton value="Salvar" actionListener="#{produtoBean.salvar}" 
+						update=":mensagem :formProdutoTable:tableProduto" oncomplete="PF('dlgProduto').hide();"/>
+					<p:commandButton value="Fechar" oncomplete="PF('dlgProduto').hide();"/>
+				</div>
+			</div>
+			
+		
+		</h:form>
+	</p:dialog>
+		
+	</ui:define>
+
+</ui:composition>
+		
+</html>

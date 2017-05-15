@@ -1,0 +1,30 @@
+<ion-view view-title="{{pedido}}">
+    
+    <ion-content >
+        
+        <div class="list" ng-repeat="pedido in pedidos">
+            <form name="formPedido">
+                <a class="item item-thumbnail-left" href="#" >
+                    <img src="http://localhost:8080/uploads/{{pedido.idProduto}}.jpg">
+                    <h2>{{pedido.nomeProduto}}</h2>
+                    <p>Pedido Nº: {{pedido.id}}</p>
+                    <p>Mesa Nº: {{pedido.numeroMesa}}</p>
+                    <h1>Status: {{pedido.status == 1 ? 'Aguardando':'Produção'}}</h1>
+                    <div class="row">
+                        
+                        <button class="button button-block button-positive" ng-click="attPedido(pedido)">
+                          {{pedido.status == 1 ? 'Aceitar Pedido':'Pedido Pronto'}}
+                        </button>
+                        
+                    </div>
+                    
+
+                </a>
+            </form>
+            
+            
+        </div>
+        
+        
+    </ion-content>
+</ion-view>

@@ -1,0 +1,18 @@
+<ion-view view-title="{{pedidoFeitos}}">
+    
+    <ion-content >
+        
+        <div class="list" ng-repeat="pedido in pedidosConcluidos">
+            <a class="item item-thumbnail-left" href="#" >
+                <img src="http://localhost:8080/uploads/{{pedido.idProduto}}.jpg">
+                <h2>{{pedido.nomeProduto}}</h2>
+                <p>Pedido Nº: {{pedido.id}}</p>
+                <p>Mesa Nº: {{pedido.numeroMesa}} das</p>
+                <p>Status: Finalizados</p>
+            </a>
+
+        </div>
+        
+        
+    </ion-content>
+</ion-view>

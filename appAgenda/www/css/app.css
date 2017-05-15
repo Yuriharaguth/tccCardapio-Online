@@ -1,0 +1,98 @@
+/*
+ * Please see the included README.md file for license terms and conditions.
+ */
+
+
+/* This file is completely optional and not required. */
+/* Note the reference that includes it in the index.html file. */
+
+
+/* Disable certain interactions on touch devices */
+/* SOURCE: https://github.com/ftlabs/fastclick/blob/master/examples/input.html */
+/* LICENSE: https://github.com/ftlabs/fastclick/blob/master/LICENSE */
+body {
+    -webkit-touch-callout: none ;
+    -webkit-text-size-adjust: none ; -ms-text-size-adjust: none ;
+    -webkit-user-select: none ; -moz-user-select: none ; -ms-user-select: none ; user-select: none ;
+    -webkit-highlight: none ;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) ;
+    -webkit-tap-highlight-color: transparent ;      /* For some Androids */
+}
+
+/* Recommended for Windows 8 Phone */
+/* SOURCE: http://www.excellentwebworld.com/common-problems-solution-for-windows-phone-8-phonegap */
+html {
+    -ms-touch-action: pan-x ;
+}
+
+/* Recommended for Windows 8 Phone */
+/* SOURCE: http://www.excellentwebworld.com/common-problems-solution-for-windows-phone-8-phonegap */
+body {
+    -ms-touch-action: pan-y ;
+    -ms-content-zooming: none ;
+}
+
+/* allow copy-paste */
+input, textarea  {
+    -webkit-user-select: text ; -moz-user-select: text ; -ms-user-select: text ; user-select: text ;
+}
+
+body {
+    /* margin: 0.5rem ; */
+    background: white ;
+    color: black ;
+}
+
+.title, input{ font-size: 1.5rem !important;}
+.btn-add{ 
+    border:1px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    z-index: 9999;
+    text-align: center;
+    padding: 3px, 0 0 2px; 
+    background-color: #f82121;
+    top:85%;
+    left: 80%;
+    box-shadow: 2px 3px 2px 0.5px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 2px 3px 2px 0.5px rgba(0,0,0,0.3);
+    -ms-box-shadow: 2px 3px 2px 0.5px rgba(0,0,0,0.3);
+}
+
+.sliderTop{
+    background-color: #ffc900;
+}
+.footer{
+    background-color: #ffc900 !important;
+}
+.colorB{
+    color:white;
+    padding-top: 17px;
+}
+.margin-l1{
+    margin-left: 45px;
+}
+.margin-l2{
+    margin-left: 40px;
+}
+.margin-l3{
+    margin-left: 100px;
+}
+.margin-l4{
+    margin-left: 40px;
+}
+.alt{
+    height: 50px;
+}
+.alt2{
+    height: 120px;
+}
+.colorA{
+    color: #fbbc05;
+    padding-top: 20px;
+}
+.color-orange{
+     background-color: #ffc900;
+}

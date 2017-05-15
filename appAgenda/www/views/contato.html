@@ -1,0 +1,33 @@
+<ion-view view-title="{{titleContato}}">
+    
+    <ion-content class="color-orange">
+        
+        <div class="row">
+            <div class="col">
+                
+                <h3>Contate-nos</h3>
+                <p>Sugestões, criticas ou gostaria de ter mais informações sobre nosso projeto?</p>
+                
+                <form name="formContato">
+                    
+                        <div class="list">
+                            
+                          <label class="item item-input">
+                            <input type="text" placeholder="Nome" class="input" name="nome" ng-model="contato.nome">
+                          </label>
+                          <label class="item item-input">
+                            <input type="text" placeholder="Email" class="input" name="email"  ng-model="contato.email">
+                          </label>
+                          <label class="item item-input">
+                            <textarea placeholder="Comentario" class="input" name="comentario"  ng-model="contato.comentario"></textarea>
+                          </label>
+                            
+                        </div>
+    
+                </form>   
+                <button class="button button-full button-positive" ng-click="cadastroContato(contato)">Enviar</button>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>
